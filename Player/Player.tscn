@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/PlayerSheet.png" type="Texture" id=2]
+[ext_resource path="res://Player/SmokePart.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 3.81069
+
+[sub_resource type="CanvasItemMaterial" id=2]
+particles_animation = true
+particles_anim_h_frames = 14
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 1
+emission_sphere_radius = 2.0
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 95.16
+initial_velocity_random = 1.0
+angular_velocity = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 100.0
+angle = 360.0
+angle_random = 1.0
+scale = 0.6
+color = Color( 0.168627, 0.168627, 0.168627, 1 )
+anim_speed = 1.0
+
+[sub_resource type="CanvasItemMaterial" id=4]
+blend_mode = 1
+particles_animation = true
+particles_anim_h_frames = 14
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 0.523438, 0.523438, 0.523438, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+emission_shape = 1
+emission_sphere_radius = 3.48
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 122.58
+angular_velocity = 0.000169926
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 360.0
+angle_random = 1.0
+scale = 0.4
+color_ramp = SubResource( 6 )
+anim_speed = 1.0
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 1.29, 0 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+rotation = 0.785398
+scale = Vector2( 0.5, 0.5 )
+z_index = 40
+z_as_relative = false
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 32, 32 )
+
+[node name="Smoke" type="Particles2D" parent="."]
+material = SubResource( 2 )
+position = Vector2( -12.12, 0 )
+rotation = -3.14159
+z_index = 50
+z_as_relative = false
+emitting = false
+amount = 45
+lifetime = 0.4
+visibility_rect = Rect2( -25, -25, 50, 50 )
+local_coords = false
+process_material = SubResource( 3 )
+texture = ExtResource( 3 )
+
+[node name="Bright" type="Particles2D" parent="."]
+material = SubResource( 4 )
+position = Vector2( -12.12, 0 )
+rotation = -3.14159
+z_index = 50
+z_as_relative = false
+emitting = false
+amount = 20
+lifetime = 0.2
+local_coords = false
+process_material = SubResource( 7 )
+texture = ExtResource( 3 )
